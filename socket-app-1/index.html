@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My First Socket IO</title>
+  </head>
+  <body>
+    <h1 id="msg"></h1>
+
+    <!-- <input type="text" name="" id="name" />
+    <button id="send" onclick="send()">Send</button> -->
+
+    <!-- এখানে node_modules ফোল্ডারে socket.io ইন্সটল করা থাকায়, শুধু locally import করেছি। এক্ষেত্রে src হবে "/socket.io/socket.io.js" -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      let socket = io("/sell");
+      socket.on("MyEvent", function (data) {
+        document.getElementById("msg").innerText = data;
+      });
+
+      // socket.on("connect", function () {
+      //   socket.on("myEvent", function (msg) {
+      //     document.getElementById("myTime").textContent = msg;
+      //   });
+      // });
+
+      /*
+      function send() {
+        let name = document.getElementById("name").value;
+
+        // socket.send(name);
+        socket.emit("myEvent", name);
+      }
+*/
+
+      socket.on("MyBroadcast", function (data) {
+        document.getElementById("msg").innerText = data;
+      });
+    </script>
+  </body>
+</html>
