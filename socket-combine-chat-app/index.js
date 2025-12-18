@@ -6,6 +6,14 @@ const http = require("http");
 
 const expressServer = http.createServer(app);
 
+const { Server } = require("socket.io");
+
+let io = new Server(expressServer);
+
+io.on("connection", (socket) => {
+  console.log(`New user connected ${socket.id}`);
+});
+
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
