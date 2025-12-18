@@ -14,10 +14,10 @@
     <!-- এখানে node_modules ফোল্ডারে socket.io ইন্সটল করা থাকায়, শুধু locally import করেছি। এক্ষেত্রে src হবে "/socket.io/socket.io.js" -->
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      let socket = io("/sell");
-      socket.on("MyEvent", function (data) {
-        document.getElementById("msg").innerText = data;
-      });
+      let socket = io();
+      // socket.on("MyEvent", function (data) {
+      //   document.getElementById("msg").innerText = data;
+      // });
 
       // socket.on("connect", function () {
       //   socket.on("myEvent", function (msg) {
@@ -33,8 +33,13 @@
         socket.emit("myEvent", name);
       }
 */
-
+      /*
       socket.on("MyBroadcast", function (data) {
+        document.getElementById("msg").innerText = data;
+      });
+      */
+
+      socket.on("rest", (data) => {
         document.getElementById("msg").innerText = data;
       });
     </script>

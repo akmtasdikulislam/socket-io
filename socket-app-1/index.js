@@ -61,16 +61,26 @@ io.on("connection", function (socket) {
   });
 
   // Note: 'message' একটা reserved event.
-*/
+  */
 
   /* Using custom event name
   socket.on("myEvent", function (msg) {
     console.log(msg);
   });
-*/
+  */
 
-  // Broadcast example
+  /* Broadcast example
   io.sockets.emit("MyBroadcast", "Hello Everyone");
+  */
+
+  /* Rooms Example */
+  socket.join("kitchen-room");
+  io.sockets.in("kitchen-room").emit("cooking", "Fried Rice cooking");
+  io.sockets.in("kitchen-room").emit("boiling", "Boiling water");
+
+  socket.join("bed-room");
+  io.sockets.in("bed-room").emit("sleep", "I am sleeping");
+  io.sockets.in("bed-room").emit("rest", "I am taking rest");
 
   socket.on("disconnect", function () {
     console.log(`User Disconnected ${socket.id}`);
