@@ -75,7 +75,11 @@ io.on("connection", function (socket) {
 
   /* Rooms Example */
   socket.join("kitchen-room");
-  io.sockets.in("kitchen-room").emit("cooking", "Fried Rice cooking");
+  let sizeOfKitchen = io.sockets.adapter.rooms.get("kitchen-room").size;
+  io.sockets
+    .in("kitchen-room")
+    .emit("cooking", `Fried Rice cooking = ${sizeOfKitchen}`);
+  console.log(io.sockets.adapter.rooms.get("kitchen-room"));
   io.sockets.in("kitchen-room").emit("boiling", "Boiling water");
 
   socket.join("bed-room");
